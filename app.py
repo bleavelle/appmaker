@@ -4,9 +4,10 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from io import BytesIO
 
-def process_pdf(input_pdf, num_copies, font_size):
+def process_pdf(input_pdf, num_copies):
     writer = PdfWriter()
     x_coord, y_coord = 465, 285  # Hardcoded coordinates
+    font_size = 12  # Fixed font size
     
     for i in range(1, num_copies + 1):
         reader = PdfReader(input_pdf)
@@ -36,12 +37,11 @@ st.title('PDF Processor')
 
 uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 num_copies = st.number_input("Number of copies", min_value=1, value=1)
-font_size = st.number_input("Font size", min_value=1, value=12)
 
 if uploaded_file is not None:
     if st.button('Process PDF'):
         input_pdf = BytesIO(uploaded_file.read())
-        output_pdf = process_pdf(input_pdf, num_copies, font_size)
+        output_pdf = process_pdf(input_pdf, num_copies)
         
         st.download_button(
             label="Download processed PDF",
