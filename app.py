@@ -7,7 +7,7 @@ from io import BytesIO
 def process_pdf(input_pdf, num_copies):
     writer = PdfWriter()
     x_coord, y_coord = 465, 285  # Hardcoded coordinates
-    font_size = 12  # Fixed font size
+    font_size = 16  # Fixed font size
     
     for i in range(1, num_copies + 1):
         reader = PdfReader(input_pdf)
