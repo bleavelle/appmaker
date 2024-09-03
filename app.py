@@ -9,14 +9,14 @@ def process_pdf(input_pdf, num_copies, start_number):
     x_coord, y_coord = 465, 285  # Hardcoded coordinates
     font_size = 16  # Fixed font size
     
-    for i in range(start_number, start_number + num_copies):
+    for i in range(num_copies):
         reader = PdfReader(input_pdf)
         page = reader.pages[0]
         
         packet = BytesIO()
         can = canvas.Canvas(packet, pagesize=letter)
         can.setFont("Helvetica-Bold", font_size)
-        can.drawString(x_coord, y_coord, f"{i:04d}")
+        can.drawString(x_coord, y_coord, f"{start_number + i:04d}")
         can.save()
         
         packet.seek(0)
