@@ -6,8 +6,8 @@ from io import BytesIO
 
 def process_pdf(input_pdf, num_copies, start_number):
     writer = PdfWriter()
-    x_coord, y_coord = 465, 285  # Hardcoded coordinates
-    font_size = 16  # Fixed font size
+    x_coord, y_coord = 465, 285  # Coordinates for number placement
+    font_size = 16  # Font size for the number
     
     for i in range(num_copies):
         reader = PdfReader(input_pdf)
@@ -24,9 +24,6 @@ def process_pdf(input_pdf, num_copies, start_number):
         
         page.merge_page(new_pdf.pages[0])
         writer.add_page(page)
-        
-        for page_num in range(1, len(reader.pages)):
-            writer.add_page(reader.pages[page_num])
     
     output = BytesIO()
     writer.write(output)
